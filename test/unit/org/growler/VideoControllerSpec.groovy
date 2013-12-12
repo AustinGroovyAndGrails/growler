@@ -49,7 +49,7 @@ class VideoControllerSpec extends Specification {
             response.reset()
             populateValidParams(params)
             video = new Video(params)
-
+            video.presentation = Mock(Presentation)
             controller.save(video)
 
         then:"A redirect is issued to the show action"
@@ -68,6 +68,7 @@ class VideoControllerSpec extends Specification {
         when:"A domain instance is passed to the show action"
             populateValidParams(params)
             def video = new Video(params)
+            video.presentation = Mock(Presentation)
             controller.show(video)
 
         then:"A model is populated containing the domain instance"
@@ -84,6 +85,7 @@ class VideoControllerSpec extends Specification {
         when:"A domain instance is passed to the edit action"
             populateValidParams(params)
             def video = new Video(params)
+            video.presentation = Mock(Presentation)
             controller.edit(video)
 
         then:"A model is populated containing the domain instance"
@@ -112,7 +114,9 @@ class VideoControllerSpec extends Specification {
         when:"A valid domain instance is passed to the update action"
             response.reset()
             populateValidParams(params)
-            video = new Video(params).save(flush: true)
+            video = new Video(params)
+            video.presentation = Mock(Presentation)
+            video.save(flush: true)
             controller.update(video)
 
         then:"A redirect is issues to the show action"
@@ -131,7 +135,9 @@ class VideoControllerSpec extends Specification {
         when:"A domain instance is created"
             response.reset()
             populateValidParams(params)
-            def video = new Video(params).save(flush: true)
+            def video = new Video(params)
+            video.presentation = Mock(Presentation)
+            video.save(flush: true)
 
         then:"It exists"
             Video.count() == 1
