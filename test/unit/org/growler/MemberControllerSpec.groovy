@@ -11,8 +11,9 @@ class MemberControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
+        params["firstName"] = 'firstName'
+        params["lastName"] = 'lastName'
+        params["email"] = 'test@test.com'
     }
 
     void "Test the index action returns the correct model"() {

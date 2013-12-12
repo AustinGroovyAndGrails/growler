@@ -48,7 +48,7 @@ class BiographyControllerSpec extends Specification {
             response.reset()
             populateValidParams(params)
             biography = new Biography(params)
-
+            biography.member =  Mock(Member)
             controller.save(biography)
 
         then:"A redirect is issued to the show action"
@@ -83,6 +83,7 @@ class BiographyControllerSpec extends Specification {
         when:"A domain instance is passed to the edit action"
             populateValidParams(params)
             def biography = new Biography(params)
+            biography.member =  Mock(Member)
             controller.edit(biography)
 
         then:"A model is populated containing the domain instance"
@@ -111,7 +112,9 @@ class BiographyControllerSpec extends Specification {
         when:"A valid domain instance is passed to the update action"
             response.reset()
             populateValidParams(params)
-            biography = new Biography(params).save(flush: true)
+            biography = new Biography(params)
+            biography.member =  Mock(Member)
+            biography.save(flush: true)
             controller.update(biography)
 
         then:"A redirect is issues to the show action"
@@ -130,7 +133,9 @@ class BiographyControllerSpec extends Specification {
         when:"A domain instance is created"
             response.reset()
             populateValidParams(params)
-            def biography = new Biography(params).save(flush: true)
+            def biography = new Biography(params)
+            biography.member =  Mock(Member)
+            biography.save(flush: true)
 
         then:"It exists"
             Biography.count() == 1

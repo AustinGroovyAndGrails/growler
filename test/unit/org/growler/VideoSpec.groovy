@@ -28,7 +28,8 @@ class VideoSpec extends Specification {
     
     void "test missing property violations on Video"() {
         when: 'an Video is missing a title property'
-        def validateable = new Video(abstractText: 'abstract')
+        def presentation = Mock(Presentation)
+        def validateable = new Video(abstractText: 'abstract',  presentation:presentation)
         
         then: 'validate() returns false and there is one error'
         !validateable.validate()
@@ -37,7 +38,7 @@ class VideoSpec extends Specification {
         validateable.errors.fieldError.field == "title"
         
         when: 'an Video is missing a abstractText property'
-        validateable = new Video(title: 'title')
+        validateable = new Video(title: 'title',  presentation:presentation)
         
         then: 'validate() returns false and there is one error'
         !validateable.validate()

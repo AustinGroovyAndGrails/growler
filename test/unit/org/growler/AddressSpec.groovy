@@ -17,7 +17,8 @@ class AddressSpec extends Specification {
     
     void "test valid Address"() {
         when: 'an Address is valid'
-        def validateable = new Address(line1: '123 st', state:'TX', country: 'USA', postalCode: '78729')
+        def member = Mock(Member)
+        def validateable = new Address(line1: '123 st', state:'TX', country: 'USA', postalCode: '78729', member:member)
 
         then: 'validate() returns true and there are no errors'
         validateable.validate()
@@ -27,7 +28,8 @@ class AddressSpec extends Specification {
 
     void "test missing property violations on Address"() {
         when: 'an Address is missing a line1 property'
-        def validateable = new Address(state:'TX', country: 'USA', postalCode: '78729')
+        def member = Mock(Member)
+        def validateable = new Address(state:'TX', country: 'USA', postalCode: '78729', member:member)
         
         then: 'validate() returns false and there is one error'
         !validateable.validate()
@@ -36,7 +38,7 @@ class AddressSpec extends Specification {
         validateable.errors.fieldError.field == "line1"
         
         when: 'an Address is missing a state property'
-        validateable = new Address(line1: '123 st', country: 'USA', postalCode: '78729')
+        validateable = new Address(line1: '123 st', country: 'USA', postalCode: '78729', member:member)
         
         then: 'validate() returns false and there is one error'
         !validateable.validate()
@@ -45,7 +47,7 @@ class AddressSpec extends Specification {
         validateable.errors.fieldError.field == "state"
 
         when: 'an Address is missing a country property'
-        validateable = new Address(line1: '123 st', state:'TX', postalCode: '78729')
+        validateable = new Address(line1: '123 st', state:'TX', postalCode: '78729', member:member)
         
         then: 'validate() returns false and there is one error'
         !validateable.validate()
@@ -54,7 +56,7 @@ class AddressSpec extends Specification {
         validateable.errors.fieldError.field == "country"
 
         when: 'an Address is missing a postalCode property'
-        validateable = new Address(line1: '123 st', state:'TX', country: 'USA')
+        validateable = new Address(line1: '123 st', state:'TX', country: 'USA', member:member)
         
         then: 'validate() returns false and there is one error'
         !validateable.validate()
@@ -73,7 +75,8 @@ class AddressSpec extends Specification {
 1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef\
 1
 """
-        def validateable = new Address(description: text257Chars, line1:'123 st', state:'TX', country: 'USA', postalCode: '78729')
+        def member = Mock(Member)
+        def validateable = new Address(description: text257Chars, line1:'123 st', state:'TX', country: 'USA', postalCode: '78729', member:member)
         
         then: 'validate() returns false and there is one error'
         !validateable.validate()
@@ -83,7 +86,7 @@ class AddressSpec extends Specification {
         
         when: 'an Address has a line1 too big'
         
-        validateable = new Address(line1:text257Chars, state:'TX', country: 'USA', postalCode: '78729')
+        validateable = new Address(line1:text257Chars, state:'TX', country: 'USA', postalCode: '78729', member:member)
         
         then: 'validate() returns false and there is one error'
         !validateable.validate()
@@ -93,7 +96,7 @@ class AddressSpec extends Specification {
         
         when: 'an Address has a line2 too big'
         
-        validateable = new Address(line1: '123 St', line2:text257Chars, state:'TX', country: 'USA', postalCode: '78729')
+        validateable = new Address(line1: '123 St', line2:text257Chars, state:'TX', country: 'USA', postalCode: '78729', member:member)
         
         then: 'validate() returns false and there is one error'
         !validateable.validate()
@@ -103,7 +106,7 @@ class AddressSpec extends Specification {
 
         when: 'an Address has a state too big'
         
-        validateable = new Address(line1: '123 St', state:text257Chars, country: 'USA', postalCode: '78729')
+        validateable = new Address(line1: '123 St', state:text257Chars, country: 'USA', postalCode: '78729', member:member)
         
         then: 'validate() returns false and there is one error'
         !validateable.validate()
@@ -113,7 +116,7 @@ class AddressSpec extends Specification {
         
         when: 'an Address has a country too big'
         
-        validateable = new Address(line1: '123 St', state:'TX', country: text257Chars, postalCode: '78729')
+        validateable = new Address(line1: '123 St', state:'TX', country: text257Chars, postalCode: '78729', member:member)
         
         then: 'validate() returns false and there is one error'
         !validateable.validate()
@@ -123,7 +126,7 @@ class AddressSpec extends Specification {
         
         when: 'an Address has a postalCode too big'
         
-        validateable = new Address(line1: '123 St', state:'TX', country: 'USA', postalCode: text257Chars)
+        validateable = new Address(line1: '123 St', state:'TX', country: 'USA', postalCode: text257Chars, member:member)
         
         then: 'validate() returns false and there is one error'
         !validateable.validate()

@@ -48,7 +48,7 @@ class AddressControllerSpec extends Specification {
             response.reset()
             populateValidParams(params)
             address = new Address(params)
-
+            address.member = Mock(Member)
             controller.save(address)
 
         then:"A redirect is issued to the show action"
@@ -67,6 +67,7 @@ class AddressControllerSpec extends Specification {
         when:"A domain instance is passed to the show action"
             populateValidParams(params)
             def address = new Address(params)
+            address.member = Mock(Member)
             controller.show(address)
 
         then:"A model is populated containing the domain instance"
@@ -83,6 +84,7 @@ class AddressControllerSpec extends Specification {
         when:"A domain instance is passed to the edit action"
             populateValidParams(params)
             def address = new Address(params)
+            address.member = Mock(Member)
             controller.edit(address)
 
         then:"A model is populated containing the domain instance"
@@ -111,7 +113,9 @@ class AddressControllerSpec extends Specification {
         when:"A valid domain instance is passed to the update action"
             response.reset()
             populateValidParams(params)
-            address = new Address(params).save(flush: true)
+            address = new Address(params)
+            address.member = Mock(Member)
+            address.save(flush: true)
             controller.update(address)
 
         then:"A redirect is issues to the show action"
@@ -130,7 +134,9 @@ class AddressControllerSpec extends Specification {
         when:"A domain instance is created"
             response.reset()
             populateValidParams(params)
-            def address = new Address(params).save(flush: true)
+            def address = new Address(params)
+            address.member = Mock(Member)
+            address.save(flush: true)
 
         then:"It exists"
             Address.count() == 1
