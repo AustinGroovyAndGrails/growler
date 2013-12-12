@@ -17,7 +17,8 @@ class VideoSpec extends Specification {
    
     void "test valid Video"() {
         when: 'an Video is valid'
-        def validateable = new Video(title: 'title', abstractText: 'abstract')
+        def presentation = Mock(Presentation)
+        def validateable = new Video(title: 'title', abstractText: 'abstract', presentation:presentation)
 
         then: 'validate() returns true and there are no errors'
         validateable.validate()
