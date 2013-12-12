@@ -9,7 +9,11 @@ import spock.lang.Specification
 @TestFor(Presentation)
 class PresentationSpec extends Specification {
 
+    def speakerObject;
+    def eventObject;
     def setup() {
+      speakerObject = Mock(Speaker)
+      eventObject = Mock(Event)
     }
 
     def cleanup() {
@@ -17,7 +21,7 @@ class PresentationSpec extends Specification {
 
     void "test valid Presentation"() {
         when: 'a Presentation is valid'
-        def validateable = new Presentation(title:'title', abstractText:'abstractText', summary: 'summary', presentationType:'WORKSHOP', targetAudiance:'dev', lengthMinutes:60)
+        def validateable = new Presentation(title:'title', speakerObject, event: eventObject,abstractText:'abstractText', summary: 'summary', presentationType:'WORKSHOP', targetAudiance:'dev', lengthMinutes:60)
         then: 'validate() returns true and there are no errors'
         validateable.validate()
         !validateable.hasErrors()
@@ -26,7 +30,7 @@ class PresentationSpec extends Specification {
 
     void "test title property violations on Presentation"() {
         when: 'a Presentation is missing a title property'
-        def validateable = new Presentation(abstractText:'abstractText', summary: 'summary', presentationType:'WORKSHOP', targetAudiance:'dev', lengthMinutes:60)
+        def validateable = new Presentation(speaker:speakerObject, event:eventObject, abstractText:'abstractText', summary: 'summary', presentationType:'WORKSHOP', targetAudiance:'dev', lengthMinutes:60)
         
         then: 'validate() returns false and there is one error'
         !validateable.validate()
@@ -40,7 +44,7 @@ class PresentationSpec extends Specification {
 1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF\
 1
 """
-        validateable = new Presentation(title:title257Chars, abstractText:'abstractText', summary: 'summary', presentationType:'WORKSHOP', targetAudiance:'dev', lengthMinutes:60)
+        validateable = new Presentation(speaker:speakerObject,event:eventObject,title:title257Chars, abstractText:'abstractText', summary: 'summary', presentationType:'WORKSHOP', targetAudiance:'dev', lengthMinutes:60)
         
         then: 'validate() returns false and there is one error'
         !validateable.validate()
@@ -51,7 +55,7 @@ class PresentationSpec extends Specification {
     
     void "test abstractText property violations on Presentation"() {
         when: 'a Presentation is missing a abstractText property'
-        def validateable = new Presentation(title:'title', summary: 'summary', presentationType:'WORKSHOP', targetAudiance:'dev', lengthMinutes:60)
+        def validateable = new Presentation(speaker:speakerObject, event:eventObject,title:'title', summary: 'summary', presentationType:'WORKSHOP', targetAudiance:'dev', lengthMinutes:60)
         
         then: 'validate() returns false and there is one error'
         !validateable.validate()
@@ -71,7 +75,7 @@ class PresentationSpec extends Specification {
 1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF\
 1
 """
-        validateable = new Presentation(title:'title', abstractText:abstractText1025Chars, summary: 'summary', presentationType:'WORKSHOP', targetAudiance:'dev', lengthMinutes:60)
+        validateable = new Presentation(speaker:speakerObject, event:eventObject,title:'title', abstractText:abstractText1025Chars, summary: 'summary', presentationType:'WORKSHOP', targetAudiance:'dev', lengthMinutes:60)
         
         then: 'validate() returns false and there is one error'
         !validateable.validate()
@@ -82,7 +86,7 @@ class PresentationSpec extends Specification {
     
     void "test summary property violations on Presentation"() {
         when: 'a Presentation is missing a summary property'
-        def validateable = new Presentation(title:'title', abstractText: 'abstractText:', presentationType:'WORKSHOP', targetAudiance:'dev', lengthMinutes:60)
+        def validateable = new Presentation(speaker:speakerObject, event:eventObject,title:'title', abstractText: 'abstractText:', presentationType:'WORKSHOP', targetAudiance:'dev', lengthMinutes:60)
         
         then: 'validate() returns false and there is one error'
         !validateable.validate()
@@ -110,7 +114,7 @@ class PresentationSpec extends Specification {
 1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF\
 1
 """
-        validateable = new Presentation(title:'title', abstractText:'abstractText', summary: summary2049Chars, presentationType:'WORKSHOP', targetAudiance:'dev', lengthMinutes:60)
+        validateable = new Presentation(speaker:speakerObject, event:eventObject,title:'title', abstractText:'abstractText', summary: summary2049Chars, presentationType:'WORKSHOP', targetAudiance:'dev', lengthMinutes:60)
         
         then: 'validate() returns false and there is one error'
         !validateable.validate()
@@ -121,7 +125,7 @@ class PresentationSpec extends Specification {
 
     void "test presentationType property violations on Presentation"() {
         when: 'a Presentation is missing a presentationType property'
-        def validateable =  new Presentation(title:'title', abstractText:'abstractText', summary: 'summary', targetAudiance:'dev', lengthMinutes:60)
+        def validateable =  new Presentation(speaker:speakerObject, event:eventObject,title:'title', abstractText:'abstractText', summary: 'summary', targetAudiance:'dev', lengthMinutes:60)
         
         then: 'validate() returns false and there is one error'
         !validateable.validate()
@@ -130,7 +134,7 @@ class PresentationSpec extends Specification {
         validateable.errors.fieldError.field == "presentationType"
         
         when: 'a Presentation has a presentationType that is not in [WORKSHOP,PANEL_DISCUSSION,LECTURE]'
-        validateable =  new Presentation(title:'title', abstractText:'abstractText', summary: 'summary', presentationType:'FOO', targetAudiance:'dev', lengthMinutes:60)
+        validateable =  new Presentation(speaker:speakerObject, event:eventObject,title:'title', abstractText:'abstractText', summary: 'summary', presentationType:'FOO', targetAudiance:'dev', lengthMinutes:60)
         
         then: 'validate() returns false and there is one error'
         //
@@ -145,7 +149,7 @@ class PresentationSpec extends Specification {
     
     void "test targetAudiance property violations on Presentation"() {
         when: 'a Presentation is missing a targetAudiance property'
-        def validateable =  new Presentation(title:'title', abstractText:'abstractText', summary: 'summary', presentationType:'WORKSHOP', lengthMinutes:60)
+        def validateable =  new Presentation(speaker:speakerObject, event:eventObject,title:'title', abstractText:'abstractText', summary: 'summary', presentationType:'WORKSHOP', lengthMinutes:60)
         
         then: 'validate() returns false and there is one error'
         !validateable.validate()
@@ -158,7 +162,7 @@ class PresentationSpec extends Specification {
 1234567890ABCDEF1234567890ABCDEFABCDEF\
 1
 """
-        validateable =  new Presentation(title:'title', abstractText:'abstractText', summary: 'summary', presentationType:'FOO', targetAudiance:targetAudiance33Chars, lengthMinutes:60)
+        validateable =  new Presentation(speaker:speakerObject, event:eventObject,title:'title', abstractText:'abstractText', summary: 'summary', presentationType:'FOO', targetAudiance:targetAudiance33Chars, lengthMinutes:60)
         
         then: 'validate() returns false and there is one error'
         !validateable.validate()
@@ -169,7 +173,7 @@ class PresentationSpec extends Specification {
 
     void "test lengthMinutes property violations on Presentation"() {
         when: 'a Presentation has a lengthMinutes that is too big'
-        def validateable =  new Presentation(title:'title', abstractText:'abstractText', summary: 'summary', presentationType:'WORKSHOP', targetAudiance:'dev', lengthMinutes: 256)
+        def validateable =  new Presentation(speaker:speakerObject, event:eventObject,title:'title', abstractText:'abstractText', summary: 'summary', presentationType:'WORKSHOP', targetAudiance:'dev', lengthMinutes: 256)
         
         then: 'validate() returns false and there is one error'
         !validateable.validate()
