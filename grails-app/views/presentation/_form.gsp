@@ -34,7 +34,7 @@
 	<g:textField name="type" value="${presentationInstance?.type}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: presentationInstance, field: 'targetAudiance', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: presentationInstance, field: 'targetAudience', 'error')} required">
 	<label for="targetAudiance">
 		<g:message code="presentation.targetAudiance.label" default="Target Audiance" />
 		<span class="required-indicator">*</span>

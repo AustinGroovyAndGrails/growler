@@ -1,7 +1,5 @@
 package org.growler
 
-
-
 import grails.test.mixin.*
 import spock.lang.*
 
@@ -11,8 +9,9 @@ class SpeakerControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
+        params["firstName"] = 'Iam'
+        params["lastName"] = 'Speaker'
+        params["email"] = 'iamspeaker@example.com'
     }
 
     void "Test the index action returns the correct model"() {

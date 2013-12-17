@@ -6,7 +6,7 @@ class Presentation {
     String abstractText
     String summary
     String presentationType
-    String targetAudiance
+    String targetAudience
     int lengthMinutes
     Date dateCreated
     Date lastUpdate
@@ -27,7 +27,7 @@ class Presentation {
             "PANEL_DISCUSSION",
             "LECTURE"
         ]
-        targetAudiance blank: false, maxSize: 32
+        targetAudience blank: false, maxSize: 32
         lengthMinutes range: 0..240
         dateCreated nullable: true, display: false
         lastUpdate nullable: true, display: false
