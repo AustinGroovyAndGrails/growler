@@ -32,7 +32,7 @@
 					
 						<g:sortableColumn property="type" title="${message(code: 'presentation.type.label', default: 'Type')}" />
 					
-						<g:sortableColumn property="targetAudiance" title="${message(code: 'presentation.targetAudiance.label', default: 'Target Audiance')}" />
+						<g:sortableColumn property="targetAudiance" title="${message(code: 'presentation.targetAudience.label', default: 'Target Audiance')}" />
 					
 						<g:sortableColumn property="lengthMinutes" title="${message(code: 'presentation.lengthMinutes.label', default: 'Length Minutes')}" />
 					
@@ -50,7 +50,7 @@
 					
 						<td>${fieldValue(bean: presentationInstance, field: "type")}</td>
 					
-						<td>${fieldValue(bean: presentationInstance, field: "targetAudiance")}</td>
+						<td>${fieldValue(bean: presentationInstance, field: "targetAudience")}</td>
 					
 						<td>${fieldValue(bean: presentationInstance, field: "lengthMinutes")}</td>
 					

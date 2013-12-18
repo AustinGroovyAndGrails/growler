@@ -1,7 +1,5 @@
 package org.growler
 
-import java.util.Date;
-
 class Speaker extends Member {
 
     String title
@@ -24,17 +22,17 @@ class Speaker extends Member {
     }
 
     static constraints = {
-        title maxSize: 256, nullable:true
-        phone maxSize: 32, nullable:true
-        twitterId maxSize: 64, nullable:true
-        linkedInUrl url: true, maxSize: 256, nullable:true
-        webUrl url: true, maxSize: 256, nullable:true
-        company maxSize: 256, nullable:true
-        address nullable:true
-        photo nullable:true
-        gravatarUrl nullable:true, url:true, maxSize: 256
-        bios nullable:true
-        presentations nullable:true
+        title maxSize: 256, nullable: true
+        phone maxSize: 32, nullable: true
+        twitterId maxSize: 64, nullable: true
+        linkedInUrl url: true, maxSize: 256, nullable: true
+        webUrl url: true, maxSize: 256, nullable: true
+        company maxSize: 256, nullable: true
+        address nullable: true
+        photo nullable: true
+        gravatarUrl nullable: true, url: true, maxSize: 256
+        bios nullable: true
+        presentations nullable: true
         dateCreated nullable: true, display: false
         lastUpdate nullable: true, display: false
         lastUpdatedBy nullable: true, display: false
