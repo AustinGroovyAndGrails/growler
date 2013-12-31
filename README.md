@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/AustinGroovyAndGrails/growler.png?label=ready)](https://waffle.io/AustinGroovyAndGrails/growler)  
 Growler - Event Planning Management Tool
 ========================================
 
