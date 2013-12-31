@@ -7,3 +7,6 @@ Getting Started: https://github.com/AustinGroovyAndGrails/growler/wiki/4.-Gettin
 
 Please visit the WIKI for more information: https://github.com/AustinGroovyAndGrails/growler/wiki
 
+Here is how you can help!
+
+[![Stories in Ready](https://badge.waffle.io/AustinGroovyAndGrails/growler.png?label=ready)](http://waffle.io/AustinGroovyAndGrails/growler)
